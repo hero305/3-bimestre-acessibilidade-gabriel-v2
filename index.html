@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Tropicália</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --fonte-tamanho: 1rem;
+            --cor-primaria: #FF6B35;
+            --cor-secundaria: #2A9D8F;
+            --cor-destaque: #E9C46A;
+            --cor-texto: #264653;
+            --cor-fundo: #F4F1DE;
+        }
+
+        body {
+            font-size: var(--fonte-tamanho);
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            transition: all 0.3s ease;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-destaque) 100%);
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--cor-destaque) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-img {
+            max-height: 80px;
+            transition: all 0.3s;
+        }
+
+        .menu-acessibilidade {
+            position: relative;
+            display: inline-block;
+        }
+
+        .rotacao-botao {
+            transition: all 0.3s ease;
+            background-color: var(--cor-secundaria) !important;
+            border: none !important;
+        }
+
+        .rotacao-botao:hover {
+            transform: rotate(5deg);
+        }
+
+        .opcoes-acessibilidade {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 200px;
+            margin-top: 10px;
+        }
+
+        .apresenta-lista {
+            display: flex !important;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-acessibilidade {
+            background-color: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 15px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-acessibilidade:hover {
+            background-color: var(--cor-secundaria);
+            transform: scale(1.05);
+        }
+
+        .contador-fonte {
+            background-color: var(--cor-destaque);
+            color: var(--cor-texto);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .inicio-fundo {
+            background: linear-gradient(to right, rgba(255, 107, 53, 0.9), rgba(233, 196, 106, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23E9C46A" width="100" height="100"/><path fill="%23FF6B35" d="M0 0L100 100"/><path fill="%232A9D8F" d="M100 0L0 100"/></svg>');
+            background-size: cover;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .botao-inicio {
+            background-color: var(--cor-secundaria) !important;
+            border: none !important;
+            padding: 12px 30px !important;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .botao-inicio:hover {
+            background-color: var(--cor-primaria) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .img-inicio {
+            max-height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s;
+        }
+
+        .img-inicio:hover {
+            transform: scale(1.03) rotate(1deg);
+        }
+
+        .secao-tropicalia {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .fundo-galeria {
+            background: linear-gradient(135deg, var(--cor-destaque) 0%, var(--cor-primaria) 100%);
+            border-radius: 20px;
+            padding: 30px !important;
+        }
+
+        .formulario {
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: var(--cor-texto);
+            color: white;
+        }
+
+        footer i {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: var(--cor-destaque);
+            transition: all 0.3s;
+        }
+
+        footer i:hover {
+            color: var(--cor-primaria);
+            transform: translateY(-3px);
+        }
+
+        /* Estilos para o leitor de texto */
+        .leitor-texto {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .btn-leitor {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: var(--cor-primaria);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-leitor:hover {
+            background: var(--cor-secundaria);
+            transform: scale(1.1);
+        }
+
+        .btn-leitor.ativo {
+            background: var(--cor-secundaria);
+            animation: pulsar 1.5s infinite;
+        }
+
+        .controles-leitor {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            max-width: 0;
+            overflow: hidden;
+            transition: max-width 0.5s ease;
+        }
+
+        .controles-leitor.aberto {
+            max-width: 200px;
+        }
+
+        .controle-voz {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .controle-voz label {
+            font-size: 0.8rem;
+            color: var(--cor-texto);
+        }
+
+        select.controle-voz {
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 5px 10px;
+            background: white;
+        }
+
+        .texto-destaque {
+            background-color: rgba(255, 107, 53, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        @keyframes pulsar {
+            0% { box-shadow: 0 0 0 0 rgba(42, 157, 143, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(42, 157, 143, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(42, 157, 143, 0); }
+        }
+
+        /* Estilos para alto contraste */
+        .alto-contraste {
+            --cor-fundo: #000;
+            --cor-texto: #FFF;
+            --cor-primaria: #FF0;
+            --cor-secundaria: #0FF;
+            --cor-destaque: #F0F;
+        }
+
+        .alto-contraste .leitor-texto {
+            background: black;
+            border: 2px solid var(--cor-primaria);
+        }
+
+        .alto-contraste .btn-leitor {
+            background: var(--cor-primaria);
+            color: black;
+        }
+
+        /* Ajustes de responsividade */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .inicio-fundo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .esquerda-conteudo {
+                margin-bottom: 30px;
+            }
+            
+            .opcoes-acessibilidade {
+                right: -50px;
+            }
+            
+            .leitor-texto {
+                bottom: 10px;
+                right: 10px;
+                flex-direction: column;
+                border-radius: 25px;
+            }
+            
+            .controles-leitor.aberto {
+                max-width: none;
+                max-height: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class=" p-5">
+        <nav class="container d-flex justify-content-between align-items-center">
+            <img src="https://via.placeholder.com/150x80/FF6B35/FFFFFF?text=Tropicália" class="nav-img " loading="lazy">
+            <ul class="nav mt-5">
+                <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+                <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+            </ul>
+
+            <div id="acessibilidade" class="menu-acessibilidade">
+                <button id="botao-acessibilidade" class="btn btn-primary rotacao-botao fw-bold">
+                    <i class="bi bi-accessibility"></i> Acessibilidade
+                </button>
+                <div id="opcoes-acessibilidade" class="opcoes-acessibilidade">
+                    <button id="aumentar-fonte" class="btn-acessibilidade">
+                        <i class="bi bi-zoom-in"></i> Aumentar Fonte
+                        <span class="contador-fonte" id="contador-aumento">0</span>
+                    </button>
+
+                    <button id="diminuir-fonte" class="btn-acessibilidade">
+                        <i class="bi bi-zoom-out"></i> Diminuir Fonte
+                        <span class="contador-fonte" id="contador-diminuicao">0</span>
+                    </button>
+
+                    <button id="alto-contraste" class="btn-acessibilidade">
+                        <i class="bi bi-circle-half"></i> Alto Contraste
+                    </button>
+
+                    <button id="reset-config" class="btn-acessibilidade">
+                        <i class="bi bi-arrow-clockwise"></i> Redefinir
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5">
+        <section id="inicio" class="my-5">
+            <div class="inicio-fundo d-flex justify-content-between align-items-center">
+                <div class="esquerda-conteudo">
+                    <h1 class="display-4 text-white fst-italic fw-bold">Boas-vindas a</h1>
+                    <img src="https://via.placeholder.com/563x278/2A9D8F/FFFFFF?text=Tropicália+Logo" class="mb-3" width="563" height="278" loading="lazy">
+                    <a href="#tropicalia" class="btn btn-primary btn-lg botao-inicio fw-semibold">Quero conhecer!</a>
+                </div>
+                <img src="https://via.placeholder.com/400x500/E9C46A/264653?text=Os+Mutantes" alt="A imagem apresenta o grupo musical Os mutantes, são três pessoas cantando em dois microfones" title="Os mutantes - CC0 Domínio Público / Acervo Arquivo Nacional" class="img-fluid img-inicio">
+            </div>
+        </section>
+
+        <section id="tropicalia" class="my-5 pt-6 secao-tropicalia">
+            <div class="container d-flex align-items-center ">
+                <div class="col-4 d-flex justify-content-center">
+                    <img src="https://via.placeholder.com/273x331/FF6B35/FFFFFF?text=Tropicália" class="rounded-pill" alt="" width="273" height="331" loading="lazy">
+                </div>
+                <div class="col-5">
+                    <h2>O que foi a Tropicália?</h2>
+                    <p class="p-2">A Tropicália, também conhecida como Tropicalismo, foi um movimento cultural brasileiro que surgiu na década de 1960, tendo seu auge entre 1967 e 1968. Esse movimento abrangeu várias expressões artísticas, como a música, o cinema, o teatro e as artes plásticas, e teve como principal característica a mistura de elementos da cultura brasileira tradicional com influências estrangeiras, especialmente do rock e da música pop. Fonte: Site Toda a matéria</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria">
+            <h2 class="text-center pt-5">Galeria</h2>
+            <div class="container p-3 mt-3 fundo-galeria ">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/400x300/2A9D8F/FFFFFF?text=Jorge+Ben" class="img-fluid rounded-5" loading="lazy">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/400x300/FF6B35/FFFFFF?text=Mutantes" class="img-fluid rounded-5" loading="lazy">
+                    </div>
+                </div>
+                <div class="row mt-4  justify-content-md-center">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/400x300/E9C46A/264653?text=Gilberto+Gil" class="img-fluid rounded-5" loading="lazy">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/400x300/264653/E9C46A?text=Caetano+Veloso" class="img-fluid rounded-5" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato">
+            <div class="container p-5 d-flex justify-content-center">
+                <div class="col-md-8 col-lg-10 rounded-5 formulario">
+                    <h2 class="mb-3">Entre em contato</h2>
+                    <form>
+                        <div class="form-group mb-3">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="nome" class="form-control rounded-3 mt-1" placeholder="Digite seu nome completo">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control rounded-3 mt-1" placeholder="Digite seu email">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" class="form-control rounded-4 mt-2" rows="4" placeholder="Escreva sua mensagem"></textarea>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill">Enviar mensagem</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="text-center p-3 fst-italic">
+        <p>Acesse nossas redes:</p>
+        <i class="bi bi-whatsapp"></i>
+        <i class="bi bi-instagram"></i>
+        <i class="bi bi-tiktok"></i>
+        <p class="mt-3">Desenvolvido por Start by Alura. Projeto fictício sem fins comerciais.</p>
+    </footer>
+
+    <!-- Leitor de Texto com Áudio -->
+    <div class="leitor-texto">
+        <button id="btn-leitor" class="btn-leitor" title="Ativar leitor de texto">
+            <i class="bi bi-soundwave"></i>
+        </button>
+        
+        <div class="controles-leitor" id="controles-leitor">
+            <button id="btn-pausar" class="btn-leitor" title="Pausar leitura">
+                <i class="bi bi-pause-fill"></i>
+            </button>
+            
+            <button id="btn-parar" class="btn-leitor" title="Parar leitura">
+                <i class="bi bi-stop-fill"></i>
+            </button>
+            
+            <div class="controle-voz">
+                <label for="select-voz">Voz:</label>
+                <select id="select-voz" class="controle-voz"></select>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botaoAcessibilidade = document.getElementById('botao-acessibilidade');
+            const opcoesAcessibilidade = document.getElementById('opcoes-acessibilidade');
+            const aumentarFonteBtn = document.getElementById('aumentar-fonte');
+            const diminuirFonteBtn = document.getElementById('diminuir-fonte');
+            const altoContrasteBtn = document.getElementById('alto-contraste');
+            const resetConfigBtn = document.getElementById('reset-config');
+            const contadorAumento = document.getElementById('contador-aumento');
+            const contadorDiminuicao = document.getElementById('contador-diminuicao');
+            
+            // Elementos do leitor de texto
+            const btnLeitor = document.getElementById('btn-leitor');
+            const btnPausar = document.getElementById('btn-pausar');
+            const btnParar = document.getElementById('btn-parar');
+            const selectVoz = document.getElementById('select-voz');
+            const controlesLeitor = document.getElementById('controles-leitor');
+            
+            let contadorFonte = 0;
+            const tamanhoMaximo = 5;
+            const tamanhoMinimo = -3;
+            
+            // Configuração do leitor de texto
+            const synth = window.speechSynthesis;
+            let utterance = null;
+            let estaLendo = false;
+            let vozes = [];
+            
+            // Carregar vozes disponíveis
+            function carregarVozes() {
+                vozes = synth.getVoices();
+                
+                // Filtrar vozes em português
+                const vozesPortugues = vozes.filter(voz => voz.lang.includes('pt'));
+                
+                // Limpar select
+                selectVoz.innerHTML = '';
+                
+                // Adicionar vozes ao select
+                vozesPortugues.forEach((voz, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${voz.name} (${voz.lang})`;
+                    selectVoz.appendChild(option);
+                });
+                
+                // Se não houver vozes em português, usar as disponíveis
+                if (vozesPortugues.length === 0) {
+                    vozes.forEach((voz, index) => {
+                        const option = document.createElement('option');
+                        option.value = index;
+                        option.textContent = `${voz.name} (${voz.lang})`;
+                        selectVoz.appendChild(option);
+                    });
+                }
+            }
+            
+            // Inicializar vozes
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = carregarVozes;
+            }
+            
+            // Carregar vozes imediatamente se já estiverem disponíveis
+            carregarVozes();
+            
+            // Alternar leitura do texto
+            btnLeitor.addEventListener('click', function() {
+                if (estaLendo) {
+                    pararLeitura();
+                } else {
+                    iniciarLeitura();
+                }
+            });
+            
+            // Pausar leitura
+            btnPausar.addEventListener('click', function() {
+                if (synth.speaking && !synth.paused) {
+                    synth.pause();
+                    btnPausar.innerHTML = '<i class="bi bi-play-fill"></i>';
+                    btnPausar.title = "Continuar leitura";
+                } else if (synth.paused) {
+                    synth.resume();
+                    btnPausar.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                    btnPausar.title = "Pausar leitura";
+                }
+            });
+            
+            // Parar leitura
+            btnParar.addEventListener('click', pararLeitura);
+            
+            // Função para iniciar a leitura
+            function iniciarLeitura() {
+                // Parar leitura atual se houver
+                if (synth.speaking) {
+                    synth.cancel();
+                }
+                
+                // Obter todo o texto da página (exceto elementos de navegação)
+                const elementosTexto = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, figcaption');
+                let textoCompleto = '';
+                
+                elementosTexto.forEach(elemento => {
+                    // Verificar se o elemento está visível e não é parte da navegação
+                    if (elemento.offsetParent !== null && 
+                        !elemento.closest('nav') && 
+                        !elemento.closest('.leitor-texto') &&
+                        !elemento.closest('.opcoes-acessibilidade')) {
+                        textoCompleto += elemento.textContent + '. ';
+                    }
+                });
+                
+                if (textoCompleto.trim() === '') {
+                    textoCompleto = 'Não há texto para ler nesta página.';
+                }
+                
+                // Criar utterance
+                utterance = new SpeechSynthesisUtterance(textoCompleto);
+                
+                // Configurar voz selecionada
+                const vozSelecionada = vozes[selectVoz.value];
+                if (vozSelecionada) {
+                    utterance.voice = vozSelecionada;
+                }
+                
+                // Configurar propriedades da fala
+                utterance.rate = 1;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                // Evento quando a fala termina
+                utterance.onend = function() {
+                    estaLendo = false;
+                    btnLeitor.classList.remove('ativo');
+                    btnLeitor.innerHTML = '<i class="bi bi-soundwave"></i>';
+                    btnLeitor.title = "Ativar leitor de texto";
+                    btnPausar.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                    btnPausar.title = "Pausar leitura";
+                    
+                    // Remover destaque de todos os elementos
+                    document.querySelectorAll('.texto-destaque').forEach(el => {
+                        el.classList.remove('texto-destaque');
+                    });
+                };
+                
+                // Iniciar fala
+                synth.speak(utterance);
+                estaLendo = true;
+                btnLeitor.classList.add('ativo');
+                btnLeitor.innerHTML = '<i class="bi bi-volume-up-fill"></i>';
+                btnLeitor.title = "Parar leitura";
+                
+                // Expandir controles
+                controlesLeitor.classList.add('aberto');
+            }
+            
+            // Função para parar a leitura
+            function pararLeitura() {
+                if (synth.speaking) {
+                    synth.cancel();
+                }
+                estaLendo = false;
+                btnLeitor.classList.remove('ativo');
+                btnLeitor.innerHTML = '<i class="bi bi-soundwave"></i>';
+                btnLeitor.title = "Ativar leitor de texto";
+                btnPausar.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                btnPausar.title = "Pausar leitura";
+                
+                // Remover destaque de todos os elementos
+                document.querySelectorAll('.texto-destaque').forEach(el => {
+                    el.classList.remove('texto-destaque');
+                });
+            }
+            
+            // Alternar visibilidade do menu de acessibilidade
+            botaoAcessibilidade.addEventListener('click', function() {
+                opcoesAcessibilidade.classList.toggle('apresenta-lista');
+            });
+            
+            // Aumentar fonte
+            aumentarFonteBtn.addEventListener('click', function() {
+                if (contadorFonte < tamanhoMaximo) {
+                    contadorFonte++;
+                    aplicarTamanhoFonte();
+                    contadorAumento.textContent = contadorFonte > 0 ? contadorFonte : 0;
+                    contadorDiminuicao.textContent = contadorFonte < 0 ? Math.abs(contadorFonte) : 0;
+                }
+            });
+            
+            // Diminuir fonte
+            diminuirFonteBtn.addEventListener('click', function() {
+                if (contadorFonte > tamanhoMinimo) {
+                    contadorFonte--;
+                    aplicarTamanhoFonte();
+                    contadorAumento.textContent = contadorFonte > 0 ? contadorFonte : 0;
+                    contadorDiminuicao.textContent = contadorFonte < 0 ? Math.abs(contadorFonte) : 0;
+                }
+            });
+            
+            // Aplicar tamanho da fonte
+            function aplicarTamanhoFonte() {
+                const tamanhoBase = 16; // Tamanho base em pixels (1rem)
+                const novoValor = tamanhoBase + (contadorFonte * 2);
+                document.documentElement.style.setProperty('--fonte-tamanho', `${novoValor}px`);
+            }
+            
+            // Alternar alto contraste
+            altoContrasteBtn.addEventListener('click', function() {
+                document.body.classList.toggle('alto-contraste');
+            });
+            
+            // Redefinir configurações
+            resetConfigBtn.addEventListener('click', function() {
+                contadorFonte = 0;
+                aplicarTamanhoFonte();
+                document.body.classList.remove('alto-contraste');
+                contadorAumento.textContent = '0';
+                contadorDiminuicao.textContent = '0';
+                pararLeitura();
+            });
+            
+            // Fechar menu de acessibilidade ao clicar fora dele
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#acessibilidade') && opcoesAcessibilidade.classList.contains('apresenta-lista')) {
+                    opcoesAcessibilidade.classList.remove('apresenta-lista');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
